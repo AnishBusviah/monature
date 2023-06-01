@@ -6,3 +6,9 @@
 5 Pink Pigeon
 6 Mauritius Ornate Day Gecko
 7 Cardinal De Maurice
+8 Mascarene Paradise Flycatcher
+9 Mauritius Cuckooshrike
+10 Mauritius Olive-White Eye
+11 Rodrigues Flying Fox (Pteropus Rodricensis)
+12 Rodrigues Fody
+13 Rodrigues Warbler
