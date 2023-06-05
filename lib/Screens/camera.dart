@@ -327,7 +327,8 @@ class CameraRoute extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: Center(child: CameraApp(title),),
+      body: Center(child:
+    CameraApp(title),),
     );
 
   }

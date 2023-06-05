@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "460098267718",
+    "project_id": "mo-nature",
+    "storage_bucket": "mo-nature.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460098267718:android:f6299d13e833809f743847",
+        "android_client_info": {
+          "package_name": "com.example.monature"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460098267718-m1atj393i1dbfnsk572sfdg3dkrnuh9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9Fun_zh7RNnCP4zk6-N26_1P2hOxJKOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460098267718-m1atj393i1dbfnsk572sfdg3dkrnuh9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
