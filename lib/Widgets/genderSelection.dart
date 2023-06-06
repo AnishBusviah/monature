@@ -3,14 +3,32 @@ import 'package:flutter/material.dart';
 List<String> Genders = ["Male", "Female", "Others"];
 
 class Genderpicker extends StatefulWidget {
-  const Genderpicker({Key? key}) : super(key: key);
 
-  @override
+
+  ///Return Selected gender
+  ValueChanged<String?>? onChangedGender;
+
+
+   Genderpicker({Key? key, this.onChangedGender}) : super(key: key);
+
+
+
+
+
+
+   @override
   State<Genderpicker> createState() => _GenderpickerState();
 }
 
 class _GenderpickerState extends State<Genderpicker> {
   String _selectedGender = Genders[2];
+  String? groupValue = null;
+
+
+  genderSelected(value){
+    widget.onChangedGender!(value);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +57,17 @@ class _GenderpickerState extends State<Genderpicker> {
               style: TextStyle(
                   color: Color.fromRGBO(102, 102, 102, 1), fontSize: 17),
             ),
-            Radio<List<String>>(
-              value: [Genders[index]],
-              groupValue: [Genders[2]],
+            Radio(
+              value: Genders[index],
+              groupValue: groupValue,
+              activeColor: Color.fromRGBO(149, 185, 1, 1),toggleable: true,
               onChanged: (value) {
+                genderSelected(value);
                 setState(() {
-                  _selectedGender = value![0];
-                  //print(_selectedGender);
+                  _selectedGender = value!;
+                  groupValue = _selectedGender;
+                  //widget.controllerGender = _selectedGender;
+                  // print(_selectedGender);
                 });
               },
             )

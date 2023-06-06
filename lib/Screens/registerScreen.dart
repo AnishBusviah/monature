@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:monature/Screens/loginScreen.dart';
+import 'package:monature/Screens/profile.dart';
 import 'package:monature/Widgets/backgroundLinearGradient.dart';
 import 'package:monature/Widgets/datepicker_dropdown.dart';
 import 'package:monature/Widgets/elevatedButtonStyle.dart';
 import 'package:monature/Widgets/genderSelection.dart';
 import 'package:monature/Widgets/textField.dart';
-
-List<String> months = <String>[
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec'
-];
+import 'package:firebase_auth/firebase_auth.dart';
+import '../auth.dart';
 
 List<String> date = <String>[(01 - 31).toString()];
 
@@ -39,13 +28,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final double paddingTop = 15;
 
-  String selectedMonth = months.first;
-
-  String selectedDate = date.first;
-
-  String selectedYear = year.first;
-
   bool _isChecked = false;
+
+  //Firebase Register
+  String? errorMessage = '';
+  bool isLogin = false;
+
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerConfirmPassword =
+      TextEditingController();
+  final TextEditingController _controllerFirstName = TextEditingController();
+  final TextEditingController _controllerLastName = TextEditingController();
+  String? _controllerGender;
+  late String _controllerBirthMonth;
+  late String _controllerBirthDay;
+  late String _controllerBirthYear;
+
+
+  Future<void> createUserWithEmailAndPassword() async {
+    try {
+      // create User
+      // add validation e.g if(passwordConfirmed())
+      await Auth().createUserWithEmailAndPassword(
+        email: _controllerEmail.text,
+        password: _controllerPassword.text,
+      );
+
+      // add User Details
+      await Auth().addUserDetails(
+          _controllerFirstName.text,
+          _controllerLastName.text,
+          _controllerBirthYear,
+          _controllerBirthMonth,
+          _controllerBirthDay,
+          _controllerGender!,
+          _controllerEmail.text);
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,11 +109,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         InputTextField(
+                          controller: _controllerFirstName,
                           displayText: "First Name",
                           textFieldWidth: textFieldWidthHalf,
                           textFieldHeight: textFieldHeight,
                         ),
                         InputTextField(
+                          controller: _controllerLastName,
                           displayText: "Last Name",
                           textFieldWidth: textFieldWidthHalf,
                           textFieldHeight: textFieldHeight,
@@ -100,6 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: paddingTop),
                     child: InputTextField(
+                        controller: _controllerEmail,
                         displayText: "Email Address",
                         textFieldWidth: textFieldWidthFull,
                         textFieldHeight: textFieldHeight),
@@ -107,6 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: paddingTop),
                     child: InputTextField(
+                        controller: _controllerPassword,
                         displayText: "Password",
                         textFieldWidth: textFieldWidthFull,
                         textFieldHeight: textFieldHeight),
@@ -114,6 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: paddingTop),
                     child: InputTextField(
+                        controller: _controllerConfirmPassword,
                         displayText: "Confirm Password",
                         textFieldWidth: textFieldWidthFull,
                         textFieldHeight: textFieldHeight),
@@ -160,11 +189,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         // selectedDay: 14, // optional
                         //selectedMonth: 10, // optional
                         //selectedYear: 1993, // optional
-                        onChangedDay: (value) => print('onChangedDay: $value'),
-                        onChangedMonth: (value) =>
-                            print('onChangedMonth: $value'),
-                        onChangedYear: (value) =>
-                            print('onChangedYear: $value'),
+                        onChangedDay: (value) {
+                          print('onChangedDay: $value');
+                          _controllerBirthDay = value!;
+                          print(_controllerBirthDay);
+                        },
+                        onChangedMonth: (value) {
+                          print('onChangedMonth: $value');
+                          _controllerBirthMonth = value!;
+                          print(_controllerBirthMonth);
+
+                        },
+                        onChangedYear: (value) {
+                          print('onChangedYear: $value');
+                          _controllerBirthYear = value!;
+                          print(_controllerBirthYear);
+                        },
                         boxDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10)),
                         // border: Border.all(color: Colors.grey, width: 1.0)), // optional
@@ -198,23 +238,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           )
                         ],
                       ),
-                      const Genderpicker(),
+                      Genderpicker(onChangedGender: (value) {
+                        setState(() {
+                          _controllerGender = value;
+                        });
+                      }),
                     ],
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Container(
                       //color: Colors.redAccent,
-                      width: textFieldWidthFull * MediaQuery.of(context).size.width,
+                      width: textFieldWidthFull *
+                          MediaQuery.of(context).size.width,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children:  [
+                        children: [
                           const SizedBox(
                               width: 310,
                               child: Text(
                                 "By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive Email Notifications from us and can opt out any time.",
-                                style: TextStyle(fontSize: 12, color: Color.fromRGBO(102, 102, 102, 1),),
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color.fromRGBO(102, 102, 102, 1),
+                                ),
                               )),
                           SizedBox(
                             width: 30,
@@ -230,10 +277,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ],
                       ),
                     ),
-                  ), Padding(
+                  ),
+                  Padding(
                     padding: const EdgeInsets.only(top: 7),
-                    child: SizedBox(width: 200, child: ElevatedButton(onPressed: (){}, style: elevatedButtonStyle(), child: const Text("Sign Up", style: TextStyle(fontWeight: FontWeight.bold),))),
-                  )],
+                    child: SizedBox(
+                        width: 200,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              createUserWithEmailAndPassword();
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                              //print(_controllerBirthYear+_controllerBirthMonth+_controllerBirthDay);
+                            },
+                            style: elevatedButtonStyle(),
+                            child: const Text(
+                              "Sign Up",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ))),
+                  )
+                ],
               ),
             ),
           )),
