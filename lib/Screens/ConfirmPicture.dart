@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:monature/Processes/modelConfig.dart';
+import 'package:monature/Screens/displayScreen.dart';
 import 'package:monature/Screens/resultScreen.dart';
 
 import './Camera.dart';
@@ -114,11 +115,11 @@ class _displayPictureState extends State<displayPicture> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                          displayResults(inputImage, results)),
-                    );
+                          builder: (BuildContext context) => DisplayScreen(results: results,)
+                          //displayResults(inputImage, results)),
+                    ));
                   },
-                  child: Icon(
+                  child: const Icon(
                     CupertinoIcons.check_mark,
                     size: 48,
                   ),
