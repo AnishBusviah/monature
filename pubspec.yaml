@@ -73,6 +73,9 @@ flutter:
   assets:
      - assets/
      - lib/Screens/home.dart
+     - assets/icons/Encyclopedia.png
+     - assets/icons/Authorities.png
+     - assets/icons/QnA.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

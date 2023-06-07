@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:monature/Screens/authorities.dart';
+import 'package:monature/Screens/encyclopedia.dart';
+import 'package:monature/Screens/identify.dart';
 import 'package:monature/Screens/loginScreen.dart';
 import '../Screens/home.dart';
 import 'package:get/get.dart';
@@ -35,11 +38,17 @@ class _BottomNavBarState
 
   static const List<Widget> _screenOptions = <Widget>[
     Home(),
+    Encyclopedia(),
+    Identify(),
+    Authorities(),
     LoginScreen(),
   ];
 
   static const List<String> _appBarTitles = <String>[
     "Home",
+    "Encyclopedia",
+    "Identify",
+    "Authorities"
     "Profile",
   ];
   
@@ -64,11 +73,26 @@ class _BottomNavBarState
         body: Center(
           child: _screenOptions.elementAt(_currentScreen),
         ),
-        bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(showUnselectedLabels: true,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.home,),
               label: 'Home',
+            ),
+
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage("assets/icons/Encyclopedia.png")),
+              label: 'Encyclopedia',
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(Icons.camera_alt),
+              label: 'Identify',
+            ),
+
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage('assets/icons/Authorities.png')),
+              label: 'Authorities',
             ),
 
             BottomNavigationBarItem(
@@ -76,6 +100,8 @@ class _BottomNavBarState
               label: 'Profile',
             ),
           ],
+          unselectedItemColor: Colors.black,
+          unselectedLabelStyle: TextStyle(color: Colors.black),
           currentIndex: _currentScreen,
           selectedItemColor: Colors.amber[800],
           onTap: _changeScreen,

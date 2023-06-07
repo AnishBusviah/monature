@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:monature/Model/species.dart';
 import '../Widgets/carouselSlider.dart';
 
 class DisplayScreen extends StatefulWidget {
@@ -10,6 +11,7 @@ class DisplayScreen extends StatefulWidget {
   String englishName;
   String frenchName;
   String scientificName;
+  String type;
   String plantDescription;
   String plantGrowthCondition;
 
@@ -27,6 +29,7 @@ class DisplayScreen extends StatefulWidget {
     this.englishName = 'English Name',
     this.frenchName = 'French Name',
     this.scientificName = 'Scientific Name',
+    this.type = 'Type',
     this.plantDescription = 'Plant Description blah blah blah more words ',
     this.plantGrowthCondition = 'Plant Growth Condition blah blah blah more words ',
     this.results,
@@ -44,8 +47,21 @@ class _DisplayScreenState extends State<DisplayScreen> {
   readJson(int index) async {
     final speciesData = await rootBundle.loadString('assets/Data Set.json');
     final decodedData = await jsonDecode(speciesData);
-    final identifiedSpeciesData = decodedData[index];
-    print(identifiedSpeciesData);
+    final identifiedSpeciesData = decodedData["SpeciesData"][index];
+
+    Species identifiedSpicies = Species.fromJson(identifiedSpeciesData);
+
+    setState(() {
+      widget.englishName = identifiedSpicies.englishName;
+      widget.frenchName = identifiedSpicies.frenchName;
+      widget.scientificName = identifiedSpicies.scientificName;
+      widget.type = identifiedSpicies.specie;
+      widget.plantDescription = identifiedSpicies.englishDescription;
+      widget.plantGrowthCondition = identifiedSpicies.growthCondition;
+      widget.image1 = Image.network(identifiedSpicies.image1);
+      widget.image2 = Image.network(identifiedSpicies.image2);
+      widget.image3 = Image.network(identifiedSpicies.image3);
+    });
   }
 
 
@@ -58,151 +74,175 @@ class _DisplayScreenState extends State<DisplayScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: Text(
-          widget.screenTitle,
-          style: titleStyle(),
-        ),
-      ),
-        Expanded(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-
-            child:
-              Column(
-                children: [
-
-                  SizedBox(
-                    child: CarouselSlider(children: [widget.image1, widget.image2, widget.image3]),
-                    ),
-
-                  Padding(
-                    padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
-                    child: Row(
-                      children: [
-                        Text(
-                          'English Name: ',
-                          style: descriptionStyle(),
-                        ),
-                        Text(
-                          widget.englishName,
-                          style: descriptionStyle(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
-                    child: Row(
-                      children: [
-                        Text(
-                          'French Name: ',
-                          style: descriptionStyle(),
-                        ),
-                        Text(
-                          widget.frenchName,
-                          style: descriptionStyle(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Scientific Name: ',
-                          style: descriptionStyle(),
-                        ),
-                        Text(
-                          widget.scientificName,
-                          style: descriptionStyle(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  
-                  
-                  Padding(
-                    padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Description: ',
-                          style: descriptionStyle(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5),
-                          child: SizedBox(
-                            height: 240,
-                            child: Text(
-                              widget.plantDescription,
-                              style: descriptionStyle(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Ideal Condition To Grow: ',
-                          style: descriptionStyle(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5),
-                          child: SizedBox(
-                            height: 240,
-                            child: Text(
-                              widget.plantGrowthCondition,
-                              style: descriptionStyle(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+    return Scaffold(
+      body: Column(
+        children: [Padding(
+          padding: const EdgeInsets.only(top: 40),
+          child: Text(
+            widget.screenTitle,
+            style: titleStyle(),
           ),
         ),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+
+              child:
+                Column(
+                  children: [
+
+                    SizedBox(
+                      child: CarouselSlider(children: [widget.image1, widget.image2, widget.image3]),
+                      ),
+
+                    Padding(
+                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
+                      child: Row(
+                        children: [
+                          Text(
+                            'English Name: ',
+                            style: descriptionTitleStyle(),
+                          ),
+                          Text(
+                            widget.englishName,
+                            style: descriptionStyle(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
+                      child: Row(
+                        children: [
+                          Text(
+                            'French Name: ',
+                            style: descriptionTitleStyle(),
+                          ),
+                          Text(
+                            widget.frenchName,
+                            style: descriptionStyle(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Scientific Name: ',
+                            style: descriptionTitleStyle(),
+                          ),
+                          Text(
+                            widget.scientificName,
+                            style: descriptionStyle(),
+                          ),
+                        ],
+                      ),
+                    ),
 
 
-            SizedBox(
-              width: 6/7 * MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                      width: 160, child: ElevatedButton(onPressed: () {Navigator.pop(context);}, child: Text('Back'))),
-                  SizedBox(width: 160,
-                    child: ElevatedButton(
-                        onPressed: () {}, child: Text('Contact Authorities')),
-                  )
-                ],
-              ),
-            )
-          ],
+                    Padding(
+                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Type: ',
+                            style: descriptionTitleStyle(),
+                          ),
+                          Text(
+                            widget.type,
+                            style: descriptionTypeStyle(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    
+                    
+                    Padding(
+                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Description: ',
+                            style: descriptionTitleStyle(),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Expanded(
+                              child: Text(
+                                widget.plantDescription,
+                                style: descriptionStyle(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
 
-      );
+                    Padding(
+                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft, bottom: 30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Ideal Condition To Grow: ',
+                            style: descriptionTitleStyle(),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Expanded(
+                              child: Text(
+                                widget.plantGrowthCondition,
+                                style: descriptionStyle(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+            ),
+          ),
+
+
+              SizedBox(
+                width: 6/7 * MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                        width: 160, child: ElevatedButton(onPressed: () {Navigator.pop(context);}, child: Text('Back'))),
+                    SizedBox(width: 160,
+                      child: ElevatedButton(
+                          onPressed: () {}, child: Text('Contact Authorities')),
+                    )
+                  ],
+                ),
+              )
+            ],
+
+        ),
+    );
 
   }
 }
 
 TextStyle titleStyle() {
-  return TextStyle(fontSize: 32);
+  return TextStyle(fontSize: 32, fontWeight: FontWeight.bold);
 }
 
 TextStyle descriptionStyle() {
   return TextStyle(fontSize: 20);
 }
 
+TextStyle descriptionTypeStyle() {
+  return TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.redAccent);
+}
+
+TextStyle descriptionTitleStyle() {
+  return TextStyle(fontSize: 20,fontWeight: FontWeight.bold);
+}
 
