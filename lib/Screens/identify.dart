@@ -39,50 +39,66 @@ class _IdentifyState extends State<Identify> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Column(
-          children: [
-            IconButton(
-              onPressed: () {
-                InitialiseCamera();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const CameraRoute("Identify Species")),
-                );
-              },
-              icon: const Icon(
-                Icons.camera_alt,
-                size: 48,
-              ),
-            ),
-            Text("Camera", style: iconLabelStyle(),),
-          ],
-        ),
-        Column(
-          children: [
-            IconButton(
+    return SizedBox(
+      height: 450,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            children: [
+              IconButton(
                 onPressed: () {
-                  pickImage();
+                  InitialiseCamera();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CameraRoute("Identify Species")),
+                  );
                 },
                 icon: const Icon(
-                  Icons.image,
+                  Icons.camera_alt,
                   size: 48,
-                )),
-            Text("Import From Gallery", style: iconLabelStyle(),),
-          ],
-        ),
-        Column(
-          children: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.question_answer, size: 48,)),
-            Text("Question & Answers", style: iconLabelStyle(),),
-          ],
-        ),
-      ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, top: 10),
+                child: Text("Camera", style: iconLabelStyle(),),
+              ),
+            ],
+          ),
+
+
+          Column(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    pickImage();
+                  },
+                  icon: const Icon(
+                    Icons.image,
+                    size: 48,
+                  )),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, top: 10),
+                child: Text("Import From Gallery", style: iconLabelStyle(),),
+              ),
+            ],
+          ),
+
+
+          Column(
+            children: [
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.question_answer, size: 48,)),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, top: 10),
+                child: Text("Question & Answers", style: iconLabelStyle(),),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

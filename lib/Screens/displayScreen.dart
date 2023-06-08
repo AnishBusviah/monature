@@ -17,9 +17,11 @@ class DisplayScreen extends StatefulWidget {
 
   var results;
 
-  Image image1 = Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/-Insert_image_here-.svg/480px--Insert_image_here-.svg.png?20220802103107");
+  Image image1 = Image.network(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/-Insert_image_here-.svg/480px--Insert_image_here-.svg.png?20220802103107");
   Image image2 = Image.network('https://www.w3.org/Graphics/PNG/alphatest.png');
-  Image image3 = Image.network('https://cms.hugofox.com//resources/images/a0fea022-8ec7-4a37-b4e7-214846e7656f.jpg');
+  Image image3 = Image.network(
+      'https://cms.hugofox.com//resources/images/a0fea022-8ec7-4a37-b4e7-214846e7656f.jpg');
 
   DisplayScreen({
     Key? key,
@@ -31,7 +33,8 @@ class DisplayScreen extends StatefulWidget {
     this.scientificName = 'Scientific Name',
     this.type = 'Type',
     this.plantDescription = 'Plant Description blah blah blah more words ',
-    this.plantGrowthCondition = 'Plant Growth Condition blah blah blah more words ',
+    this.plantGrowthCondition =
+        'Plant Growth Condition blah blah blah more words ',
     this.results,
   }) : super(key: key);
 
@@ -43,9 +46,8 @@ class _DisplayScreenState extends State<DisplayScreen> {
   double paddingTextTop = 20;
   double paddingTextLeft = 20;
 
-
   readJson(int index) async {
-    final speciesData = await rootBundle.loadString('assets/Data Set.json');
+    final speciesData = await rootBundle.loadString('assets/Species.json');
     final decodedData = await jsonDecode(speciesData);
     final identifiedSpeciesData = decodedData["SpeciesData"][index];
 
@@ -64,11 +66,27 @@ class _DisplayScreenState extends State<DisplayScreen> {
     });
   }
 
-
   @override
   void initState() {
-    int index = widget.results[0]['index'];
-    readJson(index);
+    try {
+      int index = widget.results[0]['index'];
+      readJson(index);
+    } catch (e) {
+
+
+      setState(() {
+        widget.englishName = widget.results.englishName;
+        widget.frenchName = widget.results.frenchName;
+        widget.scientificName = widget.results.scientificName;
+        widget.type = widget.results.specie;
+        widget.plantDescription = widget.results.englishDescription;
+        widget.plantGrowthCondition = widget.results.growthCondition;
+        widget.image1 = Image.network(widget.results.image1);
+        widget.image2 = Image.network(widget.results.image2);
+        widget.image3 = Image.network(widget.results.image3);
+      });
+    }
+
     super.initState();
   }
 
@@ -76,157 +94,162 @@ class _DisplayScreenState extends State<DisplayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: Text(
-            widget.screenTitle,
-            style: titleStyle(),
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Text(
+              widget.screenTitle,
+              style: titleStyle(),
+            ),
           ),
-        ),
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-
-              child:
-                Column(
-                  children: [
-
-                    SizedBox(
-                      child: CarouselSlider(children: [widget.image1, widget.image2, widget.image3]),
-                      ),
-
-                    Padding(
-                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
-                      child: Row(
-                        children: [
-                          Text(
-                            'English Name: ',
-                            style: descriptionTitleStyle(),
-                          ),
-                          Text(
-                            widget.englishName,
-                            style: descriptionStyle(),
-                          ),
-                        ],
-                      ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    child: CarouselSlider(children: [
+                      widget.image1,
+                      widget.image2,
+                      widget.image3
+                    ]),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: paddingTextTop, left: paddingTextLeft),
+                    child: Row(
+                      children: [
+                        Text(
+                          'English Name: ',
+                          style: descriptionTitleStyle(),
+                        ),
+                        Text(
+                          widget.englishName,
+                          style: descriptionStyle(),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
-                      child: Row(
-                        children: [
-                          Text(
-                            'French Name: ',
-                            style: descriptionTitleStyle(),
-                          ),
-                          Text(
-                            widget.frenchName,
-                            style: descriptionStyle(),
-                          ),
-                        ],
-                      ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: paddingTextTop, left: paddingTextLeft),
+                    child: Row(
+                      children: [
+                        Text(
+                          'French Name: ',
+                          style: descriptionTitleStyle(),
+                        ),
+                        Text(
+                          widget.frenchName,
+                          style: descriptionStyle(),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Scientific Name: ',
-                            style: descriptionTitleStyle(),
-                          ),
-                          Text(
-                            widget.scientificName,
-                            style: descriptionStyle(),
-                          ),
-                        ],
-                      ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: paddingTextTop, left: paddingTextLeft),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Scientific Name: ',
+                          style: descriptionTitleStyle(),
+                        ),
+                        Text(
+                          widget.scientificName,
+                          style: descriptionStyle(),
+                        ),
+                      ],
                     ),
-
-
-                    Padding(
-                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Type: ',
-                            style: descriptionTitleStyle(),
-                          ),
-                          Text(
-                            widget.type,
-                            style: descriptionTypeStyle(),
-                          ),
-                        ],
-                      ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: paddingTextTop, left: paddingTextLeft),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Type: ',
+                          style: descriptionTitleStyle(),
+                        ),
+                        Text(
+                          widget.type,
+                          style: descriptionTypeStyle(),
+                        ),
+                      ],
                     ),
-                    
-                    
-                    Padding(
-                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Description: ',
-                            style: descriptionTitleStyle(),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: Expanded(
-                              child: Text(
-                                widget.plantDescription,
-                                style: descriptionStyle(),
-                              ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: paddingTextTop, left: paddingTextLeft),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Description: ',
+                          style: descriptionTitleStyle(),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Expanded(
+                            child: Text(
+                              widget.plantDescription,
+                              style: descriptionStyle(),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-
-                    Padding(
-                      padding: EdgeInsets.only(top: paddingTextTop, left: paddingTextLeft, bottom: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Ideal Condition To Grow: ',
-                            style: descriptionTitleStyle(),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: Expanded(
-                              child: Text(
-                                widget.plantGrowthCondition,
-                                style: descriptionStyle(),
-                              ),
+                  ),
+                  widget.plantGrowthCondition == "null"? Container() :
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: paddingTextTop, left: paddingTextLeft, bottom: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Ideal Condition To Grow: ',
+                          style: descriptionTitleStyle(),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Expanded(
+                            child: Text(
+                              widget.plantGrowthCondition,
+                              style: descriptionStyle(),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
             ),
           ),
-
-
-              SizedBox(
-                width: 6/7 * MediaQuery.of(context).size.width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                        width: 160, child: ElevatedButton(onPressed: () {Navigator.pop(context);}, child: Text('Back'))),
-                    SizedBox(width: 160,
-                      child: ElevatedButton(
-                          onPressed: () {}, child: Text('Contact Authorities')),
-                    )
-                  ],
-                ),
-              )
-            ],
-
-        ),
+          SizedBox(
+            width: 6 / 7 * MediaQuery.of(context).size.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                    width: 160,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('Back'))),
+                SizedBox(
+                  width: 160,
+                  child: ElevatedButton(
+                      onPressed: () {}, child: Text('Contact Authorities')),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
-
   }
 }
 
@@ -239,10 +262,10 @@ TextStyle descriptionStyle() {
 }
 
 TextStyle descriptionTypeStyle() {
-  return TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.redAccent);
+  return TextStyle(
+      fontSize: 20, fontWeight: FontWeight.bold, color: Colors.redAccent);
 }
 
 TextStyle descriptionTitleStyle() {
-  return TextStyle(fontSize: 20,fontWeight: FontWeight.bold);
+  return TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 }
-

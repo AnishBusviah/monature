@@ -1,0 +1,61 @@
+{
+"Nature Reserve":[
+ {
+  "Name": "Bel Ombre Nature Reserve",
+  "Location": "Bel Ombre",
+  "Description": "From Bel Ombre Nature Reserve\n\"Nestled within the spectacular and historic 2,500-hectare domaine of Heritage Bel Ombre, Heritage Nature Reserve is a must-visit by all means in Mauritius. We offer a one of a kind, year-round premium land experience in the heart of scenic 1,300-hectare nature reserve wrapped in a stunning biodiversity that packs in plenty of fun, premium land adventures and thrills for visitors of all ages and interests. Enjoy exclusive picnics, exciting quad or buggy drives, energising treks in 1,300 hectares of lush nature, breathtaking views, impressive waterfalls and intact natural beauty. Our 4x4 safaris are also available if you are looking for a more relaxed tour of the immense reserve.\"\n",
+  "Contact Information": "230 623 5615  "
+ },
+ {
+  "Name": "\nLa Vanille Nature Park",
+  "Location": "rivière des anguilles",
+  "Description": "\"The park was created in 1985, and its name honors the old vine cultivated in the valley where the reserve of 5 hectares is located. Mauritian hospitality, conservation of nature, and welfare of the animals are privileged in this magical setting, where our guides will take you on an unforgettable visit of the reserve. e world has an extraordinary diversity of plant and animal species. Unfortunately, many of these are being pushed to extinction as a result of forest clearing, hunting and the introduction by man of invasive species to areas of the world to which they do not belong. Many of these species can now only be saved through efforts to protect their habitat, captive breeding for later reintroduction into the wild and farming to red\"",
+  "Contact Information": "626 2503   ",
+  "Column5": "  crocpark@intnet.mu"
+ },
+ {
+  "Name": "Île aux Aigrettes",
+  "Location": "Île aux Aigrettes",
+  "Description": "Ile aux Aigrettes is a small coral island of 26 hectares located just 1 km off the coast of the town of Mahebourg, in the east of Mauritius. It is a natural site classified as a “Nature Reserve” since 1965. Today, it is protected by the Mauritian Wildlife Foundation (MWF) which has done everything to preserve the endemic species of Mauritius.\nFor the record , the name of the island comes from a colony of Egrets that lived there during the 1600s. Egrets are fishing birds with long legs. During the Second World War, the island served as a military base for the British and it was during this period that most of the native forest was destroyed.\nSince 1985, the MWF foundation has been responsible for the management of Île aux Aigrettes. Its purpose is to restore the fauna and flora of the island to its original state.",
+  "Contact Information": 58314862,
+  "Column5": "grandemont@mauritian-wildlife.org"
+ },
+ {
+  "Name": "Ebony Forest Reserve Chamarel",
+  "Location": " Chamarel",
+  "Description": "\nEbony Forest Chamarel or just the \"Ebony Forest\" is a 50 ha conservation area for Mauritian endemic species with a rehabilitated indigenous forest, situated in Chamarel, in the south-west of Mauritius.\r",
+  "Contact Information": "460 3030"
+ },
+ {
+  "Name": "Vallée d'Osterlog",
+  "Location": " Le Val",
+  "Description": "Vallée d'Osterlog or Osterlog Valley is a botanical garden of Mauritian endemic species and a rehabilitated indigenous forest, situated in Le Val, in the south-east of Mauritius. It was founded on the 11 June 2014.",
+  "Contact Information": "670 4088"
+ },
+ {
+  "Name": "Black River Gorges National Park",
+  "Location": "Black River",
+  "Description": "Black River Gorges National Park is a national park in the hilly south-western part of Mauritius. It was proclaimed on June 15, 1994 and is managed by the National Parks and Conservation Service. It covers an area of 67.54 km² including humid upland forest, drier lowland forest and marshy heathland.\n",
+  "Contact Information": 2031900,
+  "Column5": " npcs@govmu.org"
+ },
+ {
+  "Name": "La Vallée de Ferney Nature Reserve",
+  "Location": "B 28, Vieux Grand Port",
+  "Description": "Ferney is a private nature reserve dedicated to conservation and eco-tourism. It offers guided tours through its lush forests, where visitors can spot endemic bird species, giant tortoises, and other native wildlife.",
+  "Contact Information": 6601937
+ },
+ {
+  "Name": "Bras d'Eau National Park",
+  "Location": "Poste Lafayette",
+  "Description": "Situated on the northeast coast of Mauritius, Bras d'Eau National Park is known for its coastal forests, wetlands, and diverse birdlife. It offers nature trails, picnic areas, and birdwatching opportunities for visitors to enjoy.",
+  "Contact Information": 4100413
+ },
+ {
+  "Name": "Domaine de l'Etoile",
+  "Location": "Sebastopol, B27",
+  "Description": "Domaine de l'Etoile is a vast private nature reserve spread across 1,200 hectares. It features beautiful landscapes, including forests, valleys, and rivers. Visitors can explore the reserve on horseback, quad bikes, or on foot, and discover its rich biodiversity.",
+  "Contact Information": 57291050
+ }
+]
+}
