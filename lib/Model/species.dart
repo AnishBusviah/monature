@@ -8,6 +8,7 @@ class Species {
   late String image1;
   late String image2;
   late String image3;
+  late String type;
 
   // Species() {
   //   this.englishName = 'No Data';
@@ -25,6 +26,7 @@ class Species {
     required this.frenchName,
     required this.scientificName,
     required this.specie,
+    required this.type,
     required this.englishDescription,
     required this.growthCondition,
     required this.image1,
@@ -39,6 +41,7 @@ class Species {
       frenchName: json["French Name"],
       scientificName: json["Scientific Name"],
       specie: json["Specie"],
+      type: json["Type"],
       englishDescription: json["Description (English)"],
       growthCondition: json["Ideal condition to grow plant"],
       image1: json["Image 1 Url"],

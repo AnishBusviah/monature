@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monature/Screens/encyclopedia.dart';
+import 'package:monature/Screens/natureReserve.dart';
+import 'package:monature/Screens/natureReserves.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -13,9 +15,22 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(children: [
-        DrawerHeader(
-          decoration: BoxDecoration(color: Colors.redAccent),
-          child: Text("Mo Nature"),
+        SizedBox(
+          height: 200,
+          child: DrawerHeader(
+            decoration: BoxDecoration(color: Color.fromRGBO(154, 177, 6, 1), ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height:100 ,
+                    child: Image.asset("assets/logo.png")),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text("Mo Nature", style: TextStyle(fontSize: 24),),
+                ),
+              ],
+            ),
+          ),
         ),
         ExpansionTile(
           title: Text("Plant"),
@@ -102,6 +117,23 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
             //more child menu
           ],
+        ),
+
+        ListTile(
+          title: const Text('Nature Reserves'),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => NatureReserveList()));
+          },
+        ),
+
+        ListTile(
+          title: const Text('About Us'),
+          onTap: () {
+
+          },
         ),
       ]),
     );

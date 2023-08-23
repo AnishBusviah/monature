@@ -46,6 +46,7 @@ dependencies:
   flutter_image_slideshow: ^0.1.5
   elliptic_text: ^1.0.1+9
   carousel_slider: ^4.2.1
+  flutter_email_sender: ^6.0.0
 #  datepicker_dropdown: ^0.0.7+5
 
 dev_dependencies:
@@ -80,6 +81,8 @@ flutter:
      - assets/icons/QnA.png
      - assets/icons/icons8-identify-plant.png
      - assets/a deer silhouet 1 (1).png
+     - assets/Nature Reserve.json
+     - lib/qna/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

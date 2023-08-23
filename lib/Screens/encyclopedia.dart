@@ -35,16 +35,16 @@ class _EncyclopediaState extends State<Encyclopedia> {
       setState(() {
         if (isPlant == true) {
           if (identifiedSpicies.specie == speciesType &&
-              identifiedSpicies.growthCondition != "null") {
+              identifiedSpicies.type == "Plant") {
             selectedSpecies.add(identifiedSpicies);
-            print(identifiedSpicies.growthCondition);
+            // print(identifiedSpicies.growthCondition);
           }
         }
         if (isPlant == false) {
           if (identifiedSpicies.specie == speciesType &&
-              identifiedSpicies.growthCondition == "null") {
+              identifiedSpicies.type == "Animal") {
             selectedSpecies.add(identifiedSpicies);
-            print(identifiedSpicies.growthCondition);
+            // print(identifiedSpicies.growthCondition);
           }
         }
       });
@@ -80,14 +80,14 @@ class _EncyclopediaState extends State<Encyclopedia> {
                 gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: MediaQuery.of(context).size.width /
-                      (MediaQuery.of(context).size.height / 1.6),
+                      (MediaQuery.of(context).size.height / 1.3),
                   mainAxisSpacing: 12.0,
                   crossAxisSpacing: 12.0,
                 ),
                 itemCount: selectedSpecies.length,
                 itemBuilder: (BuildContext ctx, index) {
                   return Container(
-                    color: Colors.redAccent,
+                    // color: Colors.redAccent,
                     width: 400,
                     // height: 200,
                     child: GestureDetector(
@@ -95,7 +95,7 @@ class _EncyclopediaState extends State<Encyclopedia> {
                       child: Column(mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.only(top: 8.0),
                             child: Container(
                               // color: Colors.red,
                               height: 170,
@@ -107,10 +107,7 @@ class _EncyclopediaState extends State<Encyclopedia> {
                             padding: const EdgeInsets.only(bottom: 5),
                             child: Text(selectedSpecies[index].englishName, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 6),
-                            child: Text(selectedSpecies[index].scientificName),
-                          )
+
                         ],
                       ),
                     ),

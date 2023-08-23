@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:monature/Model/species.dart';
 import '../Widgets/carouselSlider.dart';
 
@@ -66,6 +67,55 @@ class _DisplayScreenState extends State<DisplayScreen> {
     });
   }
 
+
+  sendEmail() async {
+    final Email email = Email(
+      body: 'Dear Sir/Madam,\n\nThis email is to inform you about the discovery of an Endemic Specimen at ...',
+      subject: 'Reporting Discovery of an Endemic Specimen at New Location',
+      recipients: ['developer16052023@gmail.com'],
+      // cc: ['cc@example.com'],
+      // bcc: ['bcc@example.com'],
+      // attachmentPaths: ['/path/to/attachment.zip'],
+      isHTML: false,
+    );
+
+    await FlutterEmailSender.send(email);
+  }
+
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Contact Authorities'),
+          content:  SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('This specimen will be reported to Natural Wildlife Foundation.'),
+                Text('Do you wish to continue?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),TextButton(
+              child: const Text('Approve'),
+              onPressed: () {
+                sendEmail();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     try {
@@ -123,9 +173,12 @@ class _DisplayScreenState extends State<DisplayScreen> {
                           'English Name: ',
                           style: descriptionTitleStyle(),
                         ),
-                        Text(
-                          widget.englishName,
-                          style: descriptionStyle(),
+                        SizedBox(
+                          width: 120,
+                          child: Text(
+                            widget.englishName,
+                            style: descriptionStyle(),
+                          ),
                         ),
                       ],
                     ),
@@ -139,9 +192,11 @@ class _DisplayScreenState extends State<DisplayScreen> {
                           'French Name: ',
                           style: descriptionTitleStyle(),
                         ),
-                        Text(
-                          widget.frenchName,
-                          style: descriptionStyle(),
+                        SizedBox(width: 120,
+                          child: Text(
+                            widget.frenchName,
+                            style: descriptionStyle(),
+                          ),
                         ),
                       ],
                     ),
@@ -155,9 +210,12 @@ class _DisplayScreenState extends State<DisplayScreen> {
                           'Scientific Name: ',
                           style: descriptionTitleStyle(),
                         ),
-                        Text(
-                          widget.scientificName,
-                          style: descriptionStyle(),
+                        SizedBox(
+                          width: 120,
+                          child: Text(
+                            widget.scientificName,
+                            style: descriptionStyle(),
+                          ),
                         ),
                       ],
                     ),
@@ -189,11 +247,14 @@ class _DisplayScreenState extends State<DisplayScreen> {
                           style: descriptionTitleStyle(),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 5),
+                          padding: const EdgeInsets.only(top: 5, right: 30),
                           child: Expanded(
-                            child: Text(
-                              widget.plantDescription,
-                              style: descriptionStyle(),
+                            child: SizedBox(
+                              width: 300,
+                              child: Text(
+                                widget.plantDescription,
+                                style: descriptionStyle(),
+                              ),
                             ),
                           ),
                         ),
@@ -233,16 +294,16 @@ class _DisplayScreenState extends State<DisplayScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                    width: 160,
+                    width: 150,
                     child: ElevatedButton(
                         onPressed: () {
                           Navigator.pop(context);
                         },
                         child: Text('Back'))),
                 SizedBox(
-                  width: 160,
+                  width: 150,
                   child: ElevatedButton(
-                      onPressed: () {}, child: Text('Contact Authorities')),
+                      onPressed: () {_showMyDialog();}, child: Text('  Contact\nAuthorities')),
                 )
               ],
             ),
@@ -269,3 +330,5 @@ TextStyle descriptionTypeStyle() {
 TextStyle descriptionTitleStyle() {
   return TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 }
+
+

@@ -8,6 +8,7 @@ import 'package:monature/Model/species.dart';
 import 'package:monature/Screens/Camera.dart';
 import 'package:monature/Screens/ConfirmPicture.dart';
 import 'package:monature/Widgets/imageCarousel.dart';
+import 'package:monature/qna/qaqns.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -179,7 +180,7 @@ class _HomeState extends State<Home> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const CameraRoute("Identify Species")),
+                                    const qa()),
                           );
                         },
                         icon: Icon(

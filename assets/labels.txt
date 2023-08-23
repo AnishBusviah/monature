@@ -9,6 +9,9 @@
 8 Mascarene Paradise Flycatcher
 9 Mauritius Cuckooshrike
 10 Mauritius Olive-White Eye
-11 Rodrigues Flying Fox (Pteropus Rodricensis)
+11 Rodrigues Flying Fox (Pteropus Rodricensis)
 12 Rodrigues Fody
 13 Rodrigues Warbler
+14 Tailpot Palms
+15 Jackfruit Tree
+16 Indian Almond tree
